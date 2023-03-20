@@ -1,0 +1,90 @@
+import random
+
+import pygame
+from pygame.locals import *
+
+pygame.init()
+
+height = 800
+width = 600
+
+window = pygame.display.set_mode((height, width))
+
+pygame.display.set_caption('Shoot With Friends BETA')
+
+clock = pygame.time.Clock()
+
+Player = pygame.image.load("Transfer/Player.png")
+OtherPlayer = pygame.image.load("Transfer/Bush.png")
+OtherOtherPlayer = pygame.image.load("Transfer/Tree.png")
+Rock = pygame.image.load("Transfer/rock.png")
+Icon = pygame.image.load("Transfer/Icon.png")
+
+# Load the background image
+
+
+pygame.display.set_icon(Icon)
+
+x = 100
+y = 100
+
+y2 = random.randrange(100, 400)
+x2 = random.randrange(100, 700)
+
+y3 = random.randrange(100, 400)
+x3 = random.randrange(100, 700)
+
+y4 = random.randrange(100, 400)
+x4 = random.randrange(100, 700)
+
+velocity = 5
+
+# Creating an Infinite loop
+run = True
+while run:
+
+    # Set the frame rates to 60 fps
+    clock.tick(60)
+
+    window.fill((175, 255, 0))
+
+    window.blit(Player, (x, y))
+    window.blit(OtherPlayer, (x2, y2))
+    window.blit(OtherOtherPlayer, (x3, y3))
+    window.blit(Rock, (x4, y4))
+
+    for event in pygame.event.get():
+
+        # Closing the window and program if the
+        # type of the event is QUIT
+        if event.type == pygame.QUIT:
+            run = False
+            pygame.quit()
+            quit()
+
+    # Storing the key pressed in a
+    # new variable using key.get_pressed()
+    # method
+    key_pressed_is = pygame.key.get_pressed()
+
+    # Changing the coordinates
+    # of the player
+    if key_pressed_is[K_LEFT]:
+        x -= 5
+    if key_pressed_is[K_RIGHT]:
+        x += 5
+    if key_pressed_is[K_UP]:
+        y -= 5
+    if key_pressed_is[K_DOWN]:
+        y += 5
+
+    from pygame import mixer
+
+    pygame.mixer.init()
+    pygame.mixer.music.load("6236000794968064.wav")
+    pygame.mixer.music.play(-1, 0.0)
+
+    pygame.mixer.music.play()
+
+    # Draws the surface object to the screen.
+    pygame.display.update()
